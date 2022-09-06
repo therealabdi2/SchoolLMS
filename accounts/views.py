@@ -11,7 +11,17 @@ from accounts.models import TeacherProfile
 @method_decorator(csrf_exempt, name='dispatch')
 class TeacherView(View):
     def get(self, request):
-        # return a json object with list of teachers
+        """
+        This function returns a json object with list of teachers.
+        The json object contains a list of teachers and the count of teachers.
+        The list of teachers contains the following information:
+        - teacher_id
+        - teacher_name
+        - teacher_email
+        - teacher_phone
+        :param request:
+        :return:
+        """
         teacher_count = TeacherProfile.objects.count()
         teachers = TeacherProfile.objects.all()
 
@@ -36,6 +46,18 @@ class TeacherView(View):
         # return JsonResponse({'error': 'Only superuser can view all teachers'}, status=403)
 
     def post(self, request):
+        """
+                This function creates a new teacher profile.
+                It takes in the following parameters:
+                name: The name of the teacher
+                email: The email of the teacher
+                phone_number: The phone number of the teacher
+                It returns the following:
+                A JSON response with the following keys:
+                message: A message indicating the success of the operation
+                :param request:
+                :return:
+        """
         post_body = json.loads(request.body)
 
         teacher_name = post_body.get('name')
@@ -64,20 +86,68 @@ class TeacherView(View):
 
 
 @method_decorator(csrf_exempt, name='dispatch')
-class TeacherUpdateDeleteView(View):
-    def put(self, request, teacher_id):
-        teacher = TeacherProfile.objects.get(id=teacher_id)
-        # getting the data from our request body
-        put_body = json.loads(request.body)
-        teacher.name = put_body.get('name')
-        teacher.save()
+class TeacherRetrieveUpdateDeleteView(View):
+    def get(self, request, teacher_id):
+        """
+        This function returns a json object with a teacher profile.
+        The json object contains the following information:
+        - teacher_id
+        - teacher_name
+        - teacher_email
+        - teacher_phone
+        :param request:
+        :param teacher_id:
+        :return:
+        """
+        try:
+            teacher = TeacherProfile.objects.get(pk=teacher_id)
+            data = {
+                'teacher_id': teacher.pk,
+                'teacher_name': teacher.name,
+                'teacher_email': teacher.email,
+                'teacher_phone': teacher.phone_number,
+            }
+            return JsonResponse(data, status=200)
+        except TeacherProfile.DoesNotExist:
+            return JsonResponse({'error': 'Teacher does not exist'}, status=404)
 
-        data = {
-            'message': f'Name of the teacher with id {teacher_id} has been updated'
-        }
-        return JsonResponse(data, status=200)
+    def put(self, request, teacher_id):
+        """
+        This function updates the name of the teacher with the given id.
+        It takes in the request body and updates the name of the teacher.
+        It returns a message with the id of the teacher whose name has been updated.
+        :param request:
+        :param teacher_id:
+        :return:
+        """
+        try:
+            teacher = TeacherProfile.objects.get(id=teacher_id)
+            # getting the data from our request body
+            put_body = json.loads(request.body)
+            teacher.name = put_body.get('name')
+            teacher.save()
+
+            data = {
+                'message': f'Name of the teacher with id {teacher_id} has been updated'
+            }
+            return JsonResponse(data, status=200)
+        except TeacherProfile.DoesNotExist:
+            data = {
+                'message': f'Teacher Profile with id {teacher_id} does not exist'
+            }
+            return JsonResponse(data, status=404)
 
     def delete(self, request, teacher_id):
+        """
+        This function deletes a teacher profile from the database.
+        It takes in the request and the teacher_id as parameters.
+        It gets the teacher profile object from the database and deletes it.
+        If the object does not exist, it returns a not found error.
+        :param request:
+        :param teacher_id:
+        :return:
+        """
+
         # get the object from DB and delete it if object does not exist return a not found error
         try:
             teacher = TeacherProfile.objects.get(id=teacher_id)

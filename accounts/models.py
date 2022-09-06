@@ -69,6 +69,12 @@ class Account(AbstractBaseUser, PermissionsMixin):
 
 
 class TeacherProfile(models.Model):
+    """
+    Args:
+    name (str): The name of the teacher.
+    email (str): The email address of the teacher.
+    phone_number (str): The phone number of the teacher.
+    """
     name = models.CharField(max_length=50)
     email = models.EmailField(max_length=100, unique=True, help_text='Enter your email address')
     phone_number = models.CharField(max_length=14)
