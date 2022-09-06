@@ -17,4 +17,7 @@ class AccountTestCase(TestCase):
         response = self.client.get(reverse("accounts:teacher_view"))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(TeacherProfile.objects.count(), 1)
+        self.assertEqual(response.data[0]["name"], "Abdullah")
+        self.assertEqual(response.data[0]["email"], "abd@gmail.com")
+        self.assertEqual(response.data[0]["phone_number"], "1234")
 

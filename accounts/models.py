@@ -79,5 +79,14 @@ class TeacherProfile(models.Model):
     email = models.EmailField(max_length=100, unique=True, help_text='Enter your email address')
     phone_number = models.CharField(max_length=14)
 
+    def as_dict(self):
+        context = {
+            'pk': self.id,
+            'name': self.name,
+            'phone_number': self.phone_number,
+        }
+
+        return context
+
     def __str__(self):
         return self.email

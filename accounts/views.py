@@ -1,6 +1,6 @@
 import json
 
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
@@ -66,7 +66,7 @@ class TeacherView(View):
 
         # check if teacher email already exists
         if TeacherProfile.objects.filter(email=teacher_email).exists():
-            return JsonResponse({'error': 'Teacher with email already exists'}, status=400)
+            return JsonResponse({'error': 'Teacher with this email already exists'}, status=400)
 
         teacher_data = {
             'name': teacher_name,
