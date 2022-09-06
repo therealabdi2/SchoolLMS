@@ -24,7 +24,7 @@ class TeacherView(View):
         """
         teacher_count = TeacherProfile.objects.count()
         teachers = TeacherProfile.objects.all()
-
+        teacher_count = len(teachers)
         teachers_serialized_data = []
         for teacher in teachers:
             teachers_serialized_data.append({
