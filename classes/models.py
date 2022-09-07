@@ -11,3 +11,10 @@ class ClassGrade(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Questions(models.Model):
+    category = models.CharField(max_length=50)
+    type = models.CharField(max_length=10)
+    difficulty = models.CharField(max_length=10)
+    question_text = models.TextField()

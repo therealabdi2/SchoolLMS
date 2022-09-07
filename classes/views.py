@@ -6,14 +6,62 @@ from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 
 from accounts.models import TeacherProfile
-from classes.models import ClassGrade
+from classes.models import ClassGrade, Questions
+import requests
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class QuestionView(View):
+
+    def get(self, request):
+        questions = Questions.objects.all()
+        question_count = len(questions)
+        questions_serialized_data = []
+        for question in questions:
+            questions_serialized_data.append({
+                'question_id': question.pk,
+                'question_category': question.category,
+                'question_type': question.type,
+                'question_difficulty': question.difficulty,
+                'question_text': question.question_text,
+                'question_count': question_count
+            })
+
+        data = {
+            'questions': questions_serialized_data,
+            'count': question_count,
+        }
+        return JsonResponse(data, status=200)
+
+    def post(self, request):
+        parameters = {
+            "amount": 1,
+            "type": "boolean",
+        }
+
+        response = requests.get("https://opentdb.com/api.php", params=parameters)
+        question_data = response.json()["results"][0]
+
+        data = {
+            'category': question_data["category"],
+            'type': question_data["type"],
+            'difficulty': question_data["difficulty"],
+            'question_text': question_data["question"],
+        }
+
+        Questions.objects.create(**data)
+
+        data = {
+            'message': 'New Question added successfully!',
+        }
+        return JsonResponse(data, status=201)
 
 
 @method_decorator(csrf_exempt, name='dispatch')
 class ClassView(View):
     def get(self, request):
-        class_count = ClassGrade.objects.count()
         classes = ClassGrade.objects.all()
+        class_count = len(classes)
 
         classes_serialized_data = []
         for some_class in classes:
