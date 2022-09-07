@@ -1,11 +1,13 @@
 import json
 
+from accounts.models import TeacherProfile
+
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 
-from accounts.models import TeacherProfile
+from faker import Faker
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -22,7 +24,6 @@ class TeacherView(View):
         :param request:
         :return:
         """
-        teacher_count = TeacherProfile.objects.count()
         teachers = TeacherProfile.objects.all()
         teacher_count = len(teachers)
         teachers_serialized_data = []
@@ -81,6 +82,25 @@ class TeacherView(View):
         teacher_obj = TeacherProfile.objects.create(**teacher_data)
         data = {
             'message': f'New Teacher profile has been created with id {teacher_obj.id}'
+        }
+        return JsonResponse(data, status=201)
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class AddFakeData(View):
+    def post(self, request):
+        fake = Faker()
+
+        teacher_data = {
+            'name': fake.name(),
+            'email': fake.email(),
+            'phone_number': fake.phone_number(),
+        }
+
+        teacher_obj = TeacherProfile.objects.create(**teacher_data)
+        data = {
+            'message': f'New Teacher profile has been created with id {teacher_obj.id}'
+
         }
         return JsonResponse(data, status=201)
 
