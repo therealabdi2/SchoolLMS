@@ -1,13 +1,12 @@
 import json
 
-from accounts.models import TeacherProfile
-
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
-
 from faker import Faker
+
+from accounts.models import TeacherProfile
 
 
 @method_decorator(csrf_exempt, name='dispatch')

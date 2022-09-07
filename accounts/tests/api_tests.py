@@ -20,4 +20,3 @@ class AccountTestCase(TestCase):
         self.assertEqual(response.data[0]["name"], "Abdullah")
         self.assertEqual(response.data[0]["email"], "abd@gmail.com")
         self.assertEqual(response.data[0]["phone_number"], "1234")
-

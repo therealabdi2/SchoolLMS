@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import AddFakeData, TeacherView, TeacherRetrieveUpdateDeleteView
+
+from .views import AddFakeData, TeacherRetrieveUpdateDeleteView, TeacherView
 
 app_name = 'accounts'
 

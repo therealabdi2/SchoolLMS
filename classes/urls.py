@@ -1,5 +1,7 @@
 from django.urls import path
-from .views import AssignTeacherView, ClassRetrieveUpdateDeleteView, ClassView, QuestionView
+
+from .views import (AssignTeacherView, ClassRetrieveUpdateDeleteView,
+                    ClassView, QuestionView)
 
 app_name = 'classes'
 
