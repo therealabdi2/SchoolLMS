@@ -1,0 +1,7 @@
+coverage
+django
+django-environ
+Faker
+Pillow
+python-slugify
+requests
