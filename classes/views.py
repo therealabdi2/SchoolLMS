@@ -34,11 +34,13 @@ class QuestionView(View):
         return JsonResponse(data, status=200)
 
     def post(self, request):
+
         parameters = {
             "amount": 1,
             "type": "boolean",
         }
 
+        # make a get request to the opentdb api
         response = requests.get("https://opentdb.com/api.php", params=parameters)
         question_data = response.json()["results"][0]
 
