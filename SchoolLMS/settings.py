@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     # apps
     'accounts',
     'classes',
+    'mongodb_practice',
 ]
 
 MIDDLEWARE = [

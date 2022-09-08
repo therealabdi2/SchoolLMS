@@ -8,4 +8,6 @@ urlpatterns = [
 
     path('classes/', include(('classes.urls', 'classes'), namespace='classes')),
 
+    path('mongo-practice/', include(('mongodb_practice.urls', 'mongodb_practice'), namespace='mongodb_practice'))
+
 ]
