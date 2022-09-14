@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from slugify import slugify
 
@@ -6,6 +8,9 @@ from accounts.models import TeacherProfile
 
 
 class ClassGrade(models.Model):
+    id = models.UUIDField(
+        primary_key=True, unique=True, null=False, editable=False, default=uuid.uuid4
+    )
     teacher = models.ManyToManyField(TeacherProfile)
     name = models.CharField(max_length=20)
     image = models.ImageField(upload_to='class_grades')
@@ -15,6 +20,9 @@ class ClassGrade(models.Model):
 
 
 class Questions(models.Model):
+    id = models.UUIDField(
+        primary_key=True, unique=True, null=False, editable=False, default=uuid.uuid4
+    )
     category = models.CharField(max_length=50)
     type = models.CharField(max_length=10)
     difficulty = models.CharField(max_length=10)

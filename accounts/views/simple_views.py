@@ -1,4 +1,5 @@
 import json
+import re
 
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
@@ -67,6 +68,16 @@ class TeacherView(View):
         # check if teacher email already exists
         if TeacherProfile.objects.filter(email=teacher_email).exists():
             return JsonResponse({'error': 'Teacher with this email already exists'}, status=400)
+
+        # check if email is valid
+        regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
+        if not re.fullmatch(regex, teacher_email):
+            return JsonResponse({'error': 'Invalid email'}, status=400)
+
+        # check if number is valid Pakistani phone number
+        regex = re.compile(r'^((\+92)?(0092)?(92)?(0)?)(3)([0-9]{9})$')
+        if not re.fullmatch(regex, teacher_phone):
+            return JsonResponse({'error': 'Invalid Pakistani phone number'}, status=400)
 
         teacher_data = {
             'name': teacher_name,

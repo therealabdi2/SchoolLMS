@@ -1,6 +1,8 @@
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
+from django.core.validators import RegexValidator
 from django.db import models
+import uuid
 
 
 # Create your models here.
@@ -74,9 +76,13 @@ class TeacherProfile(models.Model):
     email (str): The email address of the teacher.
     phone_number (str): The phone number of the teacher.
     """
+    id = models.UUIDField(
+        primary_key=True, unique=True, null=False, editable=False, default=uuid.uuid4
+    )
     name = models.CharField(max_length=50)
-    email = models.EmailField(max_length=100, unique=True, help_text='Enter your email address')
-    phone_number = models.CharField(max_length=14)
+    email = models.EmailField(max_length=100, unique=True, help_text='Enter your email address', )
+
+    phone_number = models.CharField(max_length=14, )
 
     def as_dict(self):
         context = {
