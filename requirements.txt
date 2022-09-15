@@ -73,6 +73,9 @@ django-model-utils==4.2.0 ; python_version >= "3.9" and python_version < "4.0" \
 django==4.1.1 ; python_version >= "3.9" and python_version < "4.0" \
     --hash=sha256:a153ffd5143bf26a877bfae2f4ec736ebd8924a46600ca089ad96b54a1d4e28e \
     --hash=sha256:acb21fac9275f9972d81c7caf5761a89ec3ea25fe74545dd26b8a48cb3a0203e
+djangorestframework==3.13.1 ; python_version >= "3.9" and python_version < "4.0" \
+    --hash=sha256:0c33407ce23acc68eca2a6e46424b008c9c02eceb8cf18581921d0092bc1f2ee \
+    --hash=sha256:24c4bf58ed7e85d1fe4ba250ab2da926d263cd57d64b03e8dcef0ac683f8b1aa
 dnspython==2.2.1 ; python_version >= "3.9" and python_version < "4.0" \
     --hash=sha256:0f7569a4a6ff151958b64304071d370daa3243d15941a7beedf0c9fe5105603e \
     --hash=sha256:a851e51367fb93e9e1361732c1d60dab63eff98712e503ea7d92e6eccb109b4f
@@ -197,6 +200,9 @@ python-dateutil==2.8.2 ; python_version >= "3.9" and python_version < "4.0" \
 python-slugify==6.1.2 ; python_version >= "3.9" and python_version < "4.0" \
     --hash=sha256:272d106cb31ab99b3496ba085e3fea0e9e76dcde967b5e9992500d1f785ce4e1 \
     --hash=sha256:7b2c274c308b62f4269a9ba701aa69a797e9bca41aeee5b3a9e79e36b6656927
+pytz==2022.2.1 ; python_version >= "3.9" and python_version < "4.0" \
+    --hash=sha256:220f481bdafa09c3955dfbdddb7b57780e9a94f5127e35456a48589b9e0c0197 \
+    --hash=sha256:cea221417204f2d1a2aa03ddae3e867921971d0d76f14d87abb4414415bbdcf5
 requests==2.28.1 ; python_version >= "3.9" and python_version < "4" \
     --hash=sha256:7c5599b102feddaa661c826c56ab4fee28bfd17f5abca1ebbe3e7f19d7c97983 \
     --hash=sha256:8fefa2a1a1365bf5520aac41836fbee479da67864514bdb821f31ce07ce65349
