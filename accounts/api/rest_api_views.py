@@ -6,7 +6,7 @@ from accounts.api.serializers import TeacherProfileListSerializer, TeacherProfil
 
 
 class TeacherListAPIView(ListAPIView):
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
     serializer_class = TeacherProfileListSerializer
 
     def get_queryset(self):
