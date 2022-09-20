@@ -56,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'accounts.middlewares.AuthenticationMiddleware',
 ]
 
 ROOT_URLCONF = 'SchoolLMS.urls'
@@ -155,3 +156,5 @@ LOGGING = {
         },
     },
 }
+
+HASH_STRING = "e1a0a086f9ceb640ec6884661de39c24"

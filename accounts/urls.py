@@ -1,7 +1,7 @@
 from django.urls import path
 
 from accounts.api.rest_api_views import TeacherListAPIView, TeacherRetrieveUpdateDestroyAPIView, \
-    TeacherListCreateAPIView
+    TeacherListCreateAPIView, RegisterView, LoginView
 from accounts.views.simple_views import AddFakeData, TeacherRetrieveUpdateDeleteView, TeacherView
 from accounts.views.model_views import TeacherDetailView, TeacherListView, TeacherDeleteView, TeacherUpdateView, \
     TeacherCreateView
@@ -22,6 +22,10 @@ urlpatterns = [
     path('teacher-update/<uuid:id>/', TeacherUpdateView.as_view(), name="Teacher_Update"),
 
     # REST API Views
+
+    path('v1/register/', RegisterView.as_view(), name="register_account"),
+    path('v1/login/', LoginView.as_view(), name="login_account"),
+
     path('v1/teacher-list/', TeacherListAPIView.as_view(), name="teacher_list_api"),
     path('v1/teacher-list-create/', TeacherListCreateAPIView.as_view(), name="teacher_list_create_api"),
     path('v1/teacher-crud/<uuid:id>/', TeacherRetrieveUpdateDestroyAPIView.as_view(), name="teacher_crud_api"),
