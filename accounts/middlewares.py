@@ -11,6 +11,8 @@ class AuthenticationMiddleware:
 
     def is_valid_token(self, token):
         """Validate token."""
+        if token is None:
+            return False
         data = hashlib.md5(token.encode('utf-8'))
         if settings.HASH_STRING == data.hexdigest():
             return True

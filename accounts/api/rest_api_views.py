@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from accounts.models import TeacherProfile
 from accounts.api.serializers import TeacherProfileListSerializer, TeacherProfileRetrieveUpdateDestroySerializer, \
     UserSerializer
+from accounts.permissions import OwnerReadOnly
 
 
 class RegisterView(APIView):
@@ -39,7 +40,7 @@ class LoginView(APIView):
 
 
 class TeacherListAPIView(ListAPIView):
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [OwnerReadOnly]
     serializer_class = TeacherProfileListSerializer
 
     def get_queryset(self):
@@ -47,7 +48,7 @@ class TeacherListAPIView(ListAPIView):
 
 
 class TeacherListCreateAPIView(ListCreateAPIView):
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [OwnerReadOnly]
     serializer_class = TeacherProfileListSerializer
 
     def get_queryset(self):
@@ -55,6 +56,7 @@ class TeacherListCreateAPIView(ListCreateAPIView):
 
 
 class TeacherRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    permission_classes = [OwnerReadOnly]
     lookup_field = 'id'
     queryset = TeacherProfile.objects.all()
     serializer_class = TeacherProfileRetrieveUpdateDestroySerializer
